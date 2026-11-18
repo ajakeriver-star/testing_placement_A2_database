@@ -1,0 +1,2719 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Language Hub | English Placement Test</title>
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'system-ui', '-apple-system', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              50: '#eff6ff',
+              100: '#dbeafe',
+              200: '#bfdbfe',
+              600: '#2563eb',
+              700: '#1d4ed8',
+              800: '#1e40af',
+              900: '#1e3a8a',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom scrollbar and print optimization */
+    @media print {
+      .no-print {
+        display: none !important;
+      }
+      body {
+        background-color: #ffffff !important;
+        color: #0f172a !important;
+      }
+      .print-shadow-none {
+        box-shadow: none !important;
+        border: 1px solid #cbd5e1 !important;
+      }
+    }
+
+    /* Smooth option transitions */
+    .option-card {
+      transition: all 0.15s ease-in-out;
+    }
+    .option-card:hover {
+      transform: translateY(-1px);
+    }
+
+    /* Hide scrollbar for horizontal section tabs on mobile */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
+  </style>
+</head>
+<body class="bg-slate-50 text-slate-800 font-sans antialiased min-h-screen flex flex-col selection:bg-blue-100 selection:text-blue-900">
+
+  <!-- ===================================================================== -->
+  <!-- TOP NAVIGATION BAR (Always visible, adapts to active test state)      -->
+  <!-- ===================================================================== -->
+  <header class="bg-blue-900 text-white shadow-md sticky top-0 z-40 no-print">
+    <div class="max-w-5xl mx-auto px-4 sm:px-6 py-3.5 flex flex-wrap items-center justify-between gap-3">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-500 flex items-center justify-center shadow-inner shrink-0">
+          <!-- Academic Cap / Language Icon -->
+          <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l9-5-9-5-9 5 9 5z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 14l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14z" />
+          </svg>
+        </div>
+        <div>
+          <h1 class="text-base sm:text-lg font-bold tracking-tight leading-tight">Language Hub</h1>
+          <p class="text-xs text-blue-200 font-medium">EFL Placement Assessment (Beginner – Advanced)</p>
+        </div>
+      </div>
+
+      <!-- Active Exam Status Pill (Hidden on Welcome & Results) -->
+      <div id="examHeaderControls" class="hidden flex items-center gap-3 sm:gap-5">
+        <!-- Progress Pill -->
+        <div class="hidden sm:flex flex-col items-end">
+          <span class="text-xs text-blue-200 font-medium">Answered</span>
+          <span id="headerAnsweredCount" class="text-sm font-bold text-white">0 / 70</span>
+        </div>
+
+        <!-- Countdown Timer -->
+        <div id="timerBox" class="flex items-center gap-2 bg-blue-950/80 border border-blue-700/60 px-3.5 py-1.5 rounded-xl">
+          <svg class="w-4 h-4 text-emerald-400 shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <circle cx="12" cy="12" r="10"></circle>
+            <polyline points="12 6 12 12 16 14"></polyline>
+          </svg>
+          <span id="timerDisplay" class="font-mono text-sm sm:text-base font-bold tracking-wider text-white">30:00</span>
+        </div>
+
+        <!-- Quick Submit Button -->
+        <button
+          type="button"
+          onclick="openSubmitModal()"
+          class="bg-emerald-500 hover:bg-emerald-600 active:bg-emerald-700 text-white text-xs sm:text-sm font-semibold px-3.5 py-2 rounded-xl shadow transition cursor-pointer"
+        >
+          Finish Test
+        </button>
+      </div>
+
+      <!-- Teacher / Admin Setup Gear Trigger -->
+      <button
+        type="button"
+        id="adminSetupTriggerBtn"
+        onclick="openAdminModal()"
+        title="Teacher / Admin Cloud Setup"
+        class="p-2 rounded-xl bg-blue-950/70 hover:bg-blue-800 border border-blue-700/60 text-blue-200 hover:text-white transition cursor-pointer flex items-center gap-1.5 text-xs font-semibold"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+          <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+        </svg>
+        <span class="hidden md:inline">Admin Setup</span>
+      </button>
+    </div>
+
+    <!-- Thin Progress Bar at bottom of header during test -->
+    <div id="headerProgressBarContainer" class="hidden w-full bg-blue-950 h-1.5">
+      <div id="headerProgressBar" class="bg-emerald-400 h-1.5 transition-all duration-300" style="width: 0%"></div>
+    </div>
+  </header>
+
+  <!-- ===================================================================== -->
+  <!-- MAIN APPLICATION CONTAINER                                            -->
+  <!-- ===================================================================== -->
+  <main class="flex-1 max-w-5xl w-full mx-auto px-4 sm:px-6 py-6 sm:py-10">
+
+    <!-- ------------------------------------------------------------------- -->
+    <!-- VIEW 1: WELCOME, INSTRUCTIONS & STUDENT REGISTRATION                -->
+    <!-- ------------------------------------------------------------------- -->
+    <section id="welcomeView" class="space-y-6">
+      <!-- Hero Banner -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden">
+        <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 px-6 sm:px-10 py-8 text-white">
+          <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 mb-3">
+            CEFR Levels Pre-A1 to C1
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">English Placement Test</h2>
+          <p class="mt-2 text-blue-100 text-sm sm:text-base max-w-2xl leading-relaxed">
+            Welcome! This placement test evaluates your current English grammar and vocabulary proficiency to determine your recommended <strong>Language Hub</strong> course level.
+          </p>
+        </div>
+
+        <div class="p-6 sm:p-10 space-y-8">
+          <!-- Key Test Guidelines -->
+          <div>
+            <h3 class="text-base font-bold text-slate-900 uppercase tracking-wider mb-4 flex items-center gap-2">
+              <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-800 inline-flex items-center justify-center text-xs font-extrabold">1</span>
+              Test Instructions
+            </h3>
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
+                <div class="text-blue-700 font-bold text-sm mb-1">70 Questions • 6 Sections</div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Complete the dialogues by choosing the single best option (<strong>A, B, C,</strong> or <strong>D</strong>). Questions become progressively more challenging.
+                </p>
+              </div>
+              <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
+                <div class="text-blue-700 font-bold text-sm mb-1">30-Minute Time Limit</div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  You have a maximum of <strong>30 minutes</strong>. Attempt as many questions as you can comfortably answer within the time allowed.
+                </p>
+              </div>
+              <div class="bg-slate-50 border border-slate-200/80 rounded-xl p-4">
+                <div class="text-blue-700 font-bold text-sm mb-1">Instant Placement Report</div>
+                <p class="text-xs sm:text-sm text-slate-600 leading-relaxed">
+                  Upon submission, you will immediately receive your total score, CEFR placement level, and section-by-section breakdown.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Official Example Question (0) -->
+          <div class="bg-blue-50/70 border border-blue-200 rounded-2xl p-5 sm:p-6">
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-800 bg-blue-100 px-2.5 py-1 rounded-lg">
+                Example Question (0)
+              </span>
+              <span class="text-xs font-semibold text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded-lg">
+                Correct Answer: A
+              </span>
+            </div>
+            <div class="space-y-1.5 text-sm sm:text-base text-slate-800">
+              <p><strong class="text-slate-900">Emily:</strong> What do you do at the weekends, Yara?</p>
+              <p>
+                <strong class="text-slate-900">Yara:</strong> My sister and I
+                <span class="inline-block px-3 py-0.5 mx-1 font-bold text-emerald-800 bg-emerald-100 border border-emerald-300 rounded-md">A (like)</span>
+                going to the cinema.
+              </p>
+            </div>
+            <div class="mt-4 grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs sm:text-sm">
+              <div class="px-3 py-2 rounded-xl bg-emerald-600 text-white font-semibold flex items-center gap-2 shadow-sm">
+                <span class="w-5 h-5 rounded-full bg-white/20 flex items-center justify-center text-xs">A</span> like
+              </div>
+              <div class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-xs font-semibold">B</span> like to
+              </div>
+              <div class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-xs font-semibold">C</span> want
+              </div>
+              <div class="px-3 py-2 rounded-xl bg-white border border-slate-200 text-slate-500 flex items-center gap-2">
+                <span class="w-5 h-5 rounded-full bg-slate-100 flex items-center justify-center text-xs font-semibold">D</span> want to
+              </div>
+            </div>
+          </div>
+
+          <!-- Student Registration Form -->
+          <form id="registrationForm" novalidate class="border-t border-slate-200 pt-7 space-y-5">
+            <div>
+              <h3 class="text-base font-bold text-slate-900 uppercase tracking-wider flex items-center gap-2">
+                <span class="w-6 h-6 rounded-full bg-blue-100 text-blue-800 inline-flex items-center justify-center text-xs font-extrabold">2</span>
+                Candidate Information
+              </h3>
+              <p class="text-xs sm:text-sm text-slate-500 mt-1">
+                Please enter your details below to register your exam session and generate your official placement certificate.
+              </p>
+            </div>
+
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+              <!-- First Name -->
+              <div>
+                <label for="firstName" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                  First Name <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="firstName"
+                  name="firstName"
+                  required
+                  placeholder="e.g., Sofia"
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition"
+                />
+                <p id="firstNameError" class="hidden text-xs text-rose-600 mt-1 font-medium">Please enter your first name.</p>
+              </div>
+
+              <!-- Last Name -->
+              <div>
+                <label for="lastName" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                  Last Name <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  id="lastName"
+                  name="lastName"
+                  required
+                  placeholder="e.g., Martinez"
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition"
+                />
+                <p id="lastNameError" class="hidden text-xs text-rose-600 mt-1 font-medium">Please enter your last name.</p>
+              </div>
+
+              <!-- Email Address -->
+              <div>
+                <label for="email" class="block text-sm font-semibold text-slate-700 mb-1.5">
+                  Email Address <span class="text-rose-500">*</span>
+                </label>
+                <input
+                  type="email"
+                  id="email"
+                  name="email"
+                  required
+                  placeholder="e.g., sofia.martinez@example.com"
+                  class="w-full px-4 py-2.5 rounded-xl border border-slate-300 bg-white text-slate-900 text-sm focus:outline-none focus:ring-2 focus:ring-blue-600 focus:border-blue-600 transition"
+                />
+                <p id="emailError" class="hidden text-xs text-rose-600 mt-1 font-medium">Please enter a valid email address.</p>
+              </div>
+            </div>
+
+            <div class="pt-2 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+              <p class="text-xs text-slate-500">
+                The 30-minute timer will begin as soon as you click <strong>Start Placement Test</strong>.
+              </p>
+              <button
+                type="submit"
+                class="w-full sm:w-auto inline-flex items-center justify-center gap-2 bg-blue-900 hover:bg-blue-800 active:bg-blue-950 text-white font-bold text-sm sm:text-base px-8 py-3.5 rounded-xl shadow-md hover:shadow-lg transition cursor-pointer"
+              >
+                <span>Start Placement Test</span>
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+                </svg>
+              </button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------- -->
+    <!-- VIEW 2: ACTIVE EXAM INTERFACE (SECTIONED)                           -->
+    <!-- ------------------------------------------------------------------- -->
+    <section id="examView" class="hidden space-y-6">
+      <!-- Candidate Info Strip & Section Navigation Tabs -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-4 sm:p-5 space-y-4">
+        <div class="flex flex-wrap items-center justify-between gap-2 pb-3 border-b border-slate-100">
+          <div class="text-xs sm:text-sm text-slate-600">
+            Candidate: <strong id="displayCandidateName" class="text-slate-900"></strong>
+            <span class="mx-1.5 text-slate-300">|</span>
+            <span id="displayCandidateEmail" class="text-slate-500"></span>
+          </div>
+          <div class="text-xs font-medium text-slate-500">
+            Select the best option (<strong class="text-slate-700">A–D</strong>) to complete each dialogue
+          </div>
+        </div>
+
+        <!-- Section Navigation Tabs -->
+        <div id="sectionTabsContainer" class="flex items-center gap-2 overflow-x-auto no-scrollbar pb-1" role="tablist" aria-label="Exam Sections">
+          <!-- Dynamically populated via JS -->
+        </div>
+      </div>
+
+      <!-- Current Section Header Card -->
+      <div id="sectionHeaderCard" class="bg-gradient-to-r from-blue-900 to-indigo-900 text-white rounded-2xl p-5 sm:p-6 shadow-sm flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+        <div>
+          <div class="flex items-center gap-2">
+            <span id="currentSectionBadge" class="px-2.5 py-0.5 rounded-md bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 text-xs font-bold uppercase tracking-wider">
+              Section 1 of 6
+            </span>
+            <span id="currentSectionRange" class="text-xs text-blue-200 font-medium">
+              Questions 1 – 6
+            </span>
+          </div>
+          <h2 id="currentSectionTitle" class="text-xl sm:text-2xl font-bold mt-1.5">
+            Beginner
+          </h2>
+          <p id="currentSectionDesc" class="text-xs sm:text-sm text-blue-100 mt-0.5">
+            Foundational everyday expressions, basic verb forms, and simple present structures.
+          </p>
+        </div>
+        <div class="bg-white/10 backdrop-blur-xs rounded-xl px-4 py-2.5 text-left sm:text-right shrink-0">
+          <div class="text-xs text-blue-200">Section Progress</div>
+          <div id="currentSectionProgressText" class="text-base font-bold text-white">0 / 6 answered</div>
+        </div>
+      </div>
+
+      <!-- Questions Container for Active Section -->
+      <div id="questionsContainer" class="space-y-4">
+        <!-- Question cards injected dynamically -->
+      </div>
+
+      <!-- Bottom Section Pagination Controls -->
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4">
+        <button
+          type="button"
+          id="prevSectionBtn"
+          onclick="navigateSection(-1)"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 bg-white hover:bg-slate-50 text-slate-700 font-semibold text-sm transition disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+        >
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 19l-7-7 7-7" />
+          </svg>
+          Previous Section
+        </button>
+
+        <div class="text-xs sm:text-sm text-slate-500 font-medium text-center">
+          Total Answered: <strong id="footerAnsweredCount" class="text-slate-900">0 of 70</strong>
+        </div>
+
+        <div class="flex items-center gap-3">
+          <button
+            type="button"
+            id="nextSectionBtn"
+            onclick="navigateSection(1)"
+            class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-blue-900 hover:bg-blue-800 text-white font-semibold text-sm shadow-xs transition cursor-pointer"
+          >
+            <span>Next Section</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </button>
+
+          <button
+            type="button"
+            id="bottomFinishBtn"
+            onclick="openSubmitModal()"
+            class="hidden inline-flex items-center gap-2 px-6 py-2.5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-bold text-sm shadow-sm transition cursor-pointer"
+          >
+            <span>Submit Placement Test</span>
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <!-- ------------------------------------------------------------------- -->
+    <!-- VIEW 3: PLACEMENT RESULTS & OFFICIAL REPORT                         -->
+    <!-- ------------------------------------------------------------------- -->
+    <section id="resultsView" class="hidden space-y-6">
+      <div class="bg-white rounded-2xl shadow-sm border border-slate-200/80 overflow-hidden print-shadow-none">
+        <!-- Certificate Header -->
+        <div class="bg-gradient-to-r from-blue-900 via-blue-800 to-indigo-900 px-6 sm:px-10 py-8 text-white">
+          <div class="flex flex-wrap items-start justify-between gap-4">
+            <div>
+              <span class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-emerald-500/20 text-emerald-300 border border-emerald-400/30 mb-3">
+                Official Placement Result
+              </span>
+              <h2 class="text-2xl sm:text-3xl font-extrabold tracking-tight">Placement Assessment Report</h2>
+              <p id="resultTimestamp" class="text-xs sm:text-sm text-blue-200 mt-1"></p>
+            </div>
+
+            <!-- Action Buttons (Print / Copy / CSV) -->
+            <div class="flex flex-wrap items-center gap-2.5 no-print">
+              <button
+                type="button"
+                onclick="downloadCsvReport()"
+                class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs sm:text-sm font-semibold transition cursor-pointer"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                </svg>
+                <span>Download CSV</span>
+              </button>
+              <button
+                type="button"
+                onclick="copyResultsSummary()"
+                class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white/15 hover:bg-white/25 text-white text-xs sm:text-sm font-semibold transition cursor-pointer"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                  <path d="M5 15H4a2 2 0 01-2-2V4a2 2 0 012-2h9a2 2 0 012 2v1"></path>
+                </svg>
+                <span id="copyBtnText">Copy Report</span>
+              </button>
+              <button
+                type="button"
+                onclick="window.print()"
+                class="inline-flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-emerald-500 hover:bg-emerald-600 text-white text-xs sm:text-sm font-semibold shadow transition cursor-pointer"
+              >
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                  <polyline points="6 9 6 2 18 2 18 9"></polyline>
+                  <path d="M6 18H4a2 2 0 01-2-2v-5a2 2 0 012-2h16a2 2 0 012 2v5a2 2 0 01-2 2h-2"></path>
+                  <rect x="6" y="14" width="12" height="8"></rect>
+                </svg>
+                Print / Save PDF
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <div class="p-6 sm:p-10 space-y-8">
+          <!-- Cloud Synchronization Status Banner (Firebase + Google Sheets) -->
+          <div id="cloudSyncPanel" class="bg-slate-50 border border-slate-200 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 no-print">
+            <div class="space-y-1.5">
+              <div class="text-xs font-bold uppercase tracking-wider text-slate-500">Cloud Database & Spreadsheet Sync</div>
+              <div class="flex flex-wrap items-center gap-2.5">
+                <span id="firebaseSyncBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-slate-200 text-slate-700">
+                  <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+                  Firebase: Pending
+                </span>
+                <span id="sheetsSyncBadge" class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold bg-slate-200 text-slate-700">
+                  <span class="w-2 h-2 rounded-full bg-slate-500"></span>
+                  Google Sheets: Pending
+                </span>
+              </div>
+              <p id="syncHelperNote" class="text-xs text-slate-500">
+                Results are automatically transmitted when Firebase and/or Google Sheets are configured.
+              </p>
+            </div>
+            <div class="flex items-center gap-2 shrink-0">
+              <button
+                type="button"
+                id="retrySyncBtn"
+                onclick="syncPayloadToCloud()"
+                class="inline-flex items-center gap-1.5 px-4 py-2 rounded-xl bg-blue-900 hover:bg-blue-800 text-white text-xs font-semibold shadow-xs transition cursor-pointer"
+              >
+                <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+                </svg>
+                Retry Sync
+              </button>
+            </div>
+          </div>
+
+          <!-- Candidate Info Bar -->
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 bg-slate-50 border border-slate-200/80 rounded-2xl p-5">
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Student Name</span>
+              <p id="resStudentName" class="text-base font-bold text-slate-900 mt-0.5"></p>
+            </div>
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Email Address</span>
+              <p id="resStudentEmail" class="text-base font-medium text-slate-700 mt-0.5 break-all"></p>
+            </div>
+            <div>
+              <span class="text-xs font-semibold uppercase tracking-wider text-slate-400">Time Taken</span>
+              <p id="resTimeTaken" class="text-base font-bold text-slate-900 mt-0.5"></p>
+            </div>
+          </div>
+
+          <!-- Score & Placed Level Highlight Grid -->
+          <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-stretch">
+            <!-- Score Card -->
+            <div class="md:col-span-5 bg-blue-50/70 border border-blue-200 rounded-2xl p-6 flex flex-col justify-center items-center text-center">
+              <span class="text-xs font-bold uppercase tracking-wider text-blue-800">Total Score</span>
+              <div class="my-3 flex items-baseline justify-center gap-1">
+                <span id="resRawScore" class="text-5xl sm:text-6xl font-extrabold text-blue-900">0</span>
+                <span class="text-2xl font-bold text-blue-600">/ 70</span>
+              </div>
+              <div id="resPercentagePill" class="inline-flex items-center px-3 py-1 rounded-full text-sm font-bold bg-blue-900 text-white">
+                0% Accuracy
+              </div>
+              <p id="resAttemptedText" class="text-xs text-slate-500 mt-3"></p>
+            </div>
+
+            <!-- Recommended Course Level Card -->
+            <div class="md:col-span-7 bg-emerald-50/70 border border-emerald-200 rounded-2xl p-6 flex flex-col justify-between">
+              <div>
+                <div class="flex items-center justify-between gap-2 flex-wrap">
+                  <span class="text-xs font-bold uppercase tracking-wider text-emerald-800">Recommended Placement Level</span>
+                  <span id="resCefrBadge" class="px-3 py-1 rounded-lg bg-emerald-600 text-white text-xs font-extrabold tracking-wide">
+                    CEFR A1
+                  </span>
+                </div>
+                <h3 id="resLevelTitle" class="text-2xl sm:text-3xl font-extrabold text-slate-900 mt-2">
+                  Language Hub Beginner
+                </h3>
+                <p id="resLevelDescription" class="text-sm text-slate-700 mt-2.5 leading-relaxed">
+                  <!-- Dynamic placement guidance -->
+                </p>
+              </div>
+
+              <div class="mt-5 pt-4 border-t border-emerald-200/80 flex items-center justify-between text-xs text-emerald-900 font-medium">
+                <span>Macmillan Language Hub Curriculum</span>
+                <span>Official Placement Scale</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section-by-Section Breakdown -->
+          <div>
+            <h3 class="text-base font-bold text-slate-900 uppercase tracking-wider mb-4">
+              Performance by Section & Level Band
+            </h3>
+            <div id="sectionBreakdownContainer" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Official Placement Scale Reference Table -->
+          <div class="bg-slate-50 border border-slate-200 rounded-2xl p-5">
+            <h4 class="text-xs font-bold uppercase tracking-wider text-slate-500 mb-3">Language Hub Placement Scale Reference</h4>
+            <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-2.5 text-xs">
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <div class="font-bold text-slate-900">0 – 6 pts</div>
+                <div class="text-slate-600 mt-0.5">Beginner (A1)</div>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <div class="font-bold text-slate-900">7 – 17 pts</div>
+                <div class="text-slate-600 mt-0.5">Elementary (A1+)</div>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <div class="font-bold text-slate-900">18 – 34 pts</div>
+                <div class="text-slate-600 mt-0.5">Pre-Intermediate (A2/B1)</div>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <div class="font-bold text-slate-900">35 – 48 pts</div>
+                <div class="text-slate-600 mt-0.5">Intermediate (B1/B1+)</div>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <div class="font-bold text-slate-900">49 – 60 pts</div>
+                <div class="text-slate-600 mt-0.5">Upper Intermediate (B2)</div>
+              </div>
+              <div class="bg-white p-2.5 rounded-xl border border-slate-200">
+                <div class="font-bold text-slate-900">61 – 70 pts</div>
+                <div class="text-slate-600 mt-0.5">Advanced (C1)</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Detailed Question-by-Question Review Toggle -->
+          <div class="border-t border-slate-200 pt-6">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+              <div>
+                <h3 class="text-base font-bold text-slate-900">Detailed Answer Key Review</h3>
+                <p class="text-xs sm:text-sm text-slate-500">Inspect all 70 questions with your selected answers and the official answer key.</p>
+              </div>
+              <div class="flex items-center gap-3 no-print">
+                <button
+                  type="button"
+                  id="toggleReviewBtn"
+                  onclick="toggleDetailedReview()"
+                  class="inline-flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 hover:bg-slate-800 text-white text-xs sm:text-sm font-semibold transition cursor-pointer"
+                >
+                  <span id="toggleReviewText">Show Detailed Answers</span>
+                  <svg id="toggleReviewIcon" class="w-4 h-4 transition-transform" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            <!-- Collapsible Detailed Review List -->
+            <div id="detailedReviewContainer" class="hidden mt-6 space-y-6">
+              <!-- Populated dynamically -->
+            </div>
+          </div>
+
+          <!-- Retake / Start New Test Footer -->
+          <div class="border-t border-slate-200 pt-6 flex justify-end no-print">
+            <button
+              type="button"
+              onclick="openResetModal()"
+              class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl border border-slate-300 hover:bg-slate-100 text-slate-700 text-xs sm:text-sm font-semibold transition cursor-pointer"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
+              </svg>
+              Start New Candidate Session
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ===================================================================== -->
+  <!-- FOOTER                                                                -->
+  <!-- ===================================================================== -->
+  <footer class="bg-white border-t border-slate-200 py-5 px-4 text-center text-xs text-slate-500 no-print">
+    <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-2">
+      <p>Language Hub Placement Test • Adapted from Macmillan Education by MEEVA Abraham Rivera (Beginner to Advanced)</p>
+      <button
+        type="button"
+        onclick="openAdminModal()"
+        class="text-slate-400 hover:text-blue-700 underline underline-offset-2 font-medium cursor-pointer"
+      >
+        Teacher / Admin Cloud Setup
+      </button>
+    </div>
+  </footer>
+
+  <!-- ===================================================================== -->
+  <!-- TEACHER / ADMIN SETUP MODAL (Firebase + Google Sheets Integration)    -->
+  <!-- ===================================================================== -->
+  <div id="adminModal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-xs flex items-center justify-center p-4 overflow-y-auto">
+    <div class="bg-white rounded-2xl max-w-2xl w-full p-6 sm:p-8 shadow-2xl border border-slate-200 space-y-6 my-8 max-h-[90vh] overflow-y-auto">
+      <div class="flex items-start justify-between gap-4 border-b border-slate-200 pb-4">
+        <div>
+          <span class="inline-block px-2.5 py-0.5 rounded-md bg-blue-100 text-blue-800 text-xs font-bold uppercase tracking-wider">
+            Administrator Configuration
+          </span>
+          <h3 class="text-xl font-extrabold text-slate-900 mt-1">Firebase & Google Sheets Setup</h3>
+          <p class="text-xs sm:text-sm text-slate-500 mt-0.5">
+            Configure your cloud endpoints here for local browser testing, or paste them directly into <code class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-800 font-mono">APP_CONFIG</code> in <code class="bg-slate-100 px-1.5 py-0.5 rounded text-slate-800 font-mono">index.html</code> before pushing to GitHub Pages.
+          </p>
+        </div>
+        <button
+          type="button"
+          onclick="closeAdminModal()"
+          class="p-2 rounded-xl text-slate-400 hover:text-slate-700 hover:bg-slate-100 transition cursor-pointer"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+          </svg>
+        </button>
+      </div>
+
+      <!-- Firebase Configuration Inputs -->
+      <div class="space-y-3">
+        <div class="flex items-center justify-between">
+          <h4 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-amber-500"></span>
+            1. Firebase Firestore Configuration
+          </h4>
+          <span id="adminFirebaseStatusText" class="text-xs font-semibold text-slate-500">Not Configured</span>
+        </div>
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">API Key (apiKey)</label>
+            <input type="text" id="cfgFirebaseApiKey" placeholder="AIzaSy..." class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Auth Domain (authDomain)</label>
+            <input type="text" id="cfgFirebaseAuthDomain" placeholder="your-app.firebaseapp.com" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Project ID (projectId)</label>
+            <input type="text" id="cfgFirebaseProjectId" placeholder="your-project-id" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Storage Bucket (storageBucket)</label>
+            <input type="text" id="cfgFirebaseStorageBucket" placeholder="your-app.appspot.com" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">Messaging Sender ID</label>
+            <input type="text" id="cfgFirebaseSenderId" placeholder="123456789012" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+          </div>
+          <div>
+            <label class="block font-semibold text-slate-700 mb-1">App ID (appId)</label>
+            <input type="text" id="cfgFirebaseAppId" placeholder="1:123456:web:abcdef" class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none" />
+          </div>
+        </div>
+      </div>
+
+      <!-- Google Sheets Apps Script Webhook URL -->
+      <div class="space-y-3 border-t border-slate-200 pt-4">
+        <div class="flex items-center justify-between">
+          <h4 class="text-sm font-bold text-slate-900 flex items-center gap-2">
+            <span class="w-2.5 h-2.5 rounded-full bg-emerald-500"></span>
+            2. Google Sheets Web App Webhook URL
+          </h4>
+          <span id="adminSheetsStatusText" class="text-xs font-semibold text-slate-500">Not Configured</span>
+        </div>
+        <div>
+          <label class="block text-xs font-semibold text-slate-700 mb-1">Google Apps Script Deployment URL (exec)</label>
+          <input
+            type="url"
+            id="cfgSheetsUrl"
+            placeholder="https://script.google.com/macros/s/AKfycb.../exec"
+            class="w-full px-3 py-2 rounded-xl border border-slate-300 font-mono text-xs focus:ring-2 focus:ring-blue-600 focus:outline-none"
+          />
+        </div>
+
+        <!-- Copyable Google Apps Script Code Helper -->
+        <div class="bg-slate-900 text-slate-100 rounded-xl p-4 space-y-2">
+          <div class="flex items-center justify-between">
+            <span class="text-xs font-bold text-emerald-400">Google Apps Script Code (Extensions &gt; Apps Script)</span>
+            <button
+              type="button"
+              onclick="copyAppsScriptCode()"
+              class="px-2.5 py-1 rounded-lg bg-white/10 hover:bg-white/20 text-white text-xs font-semibold transition cursor-pointer"
+            >
+              <span id="copyAppsScriptBtnText">Copy Script</span>
+            </button>
+          </div>
+          <pre id="appsScriptSnippet" class="text-[11px] font-mono text-slate-300 overflow-x-auto leading-relaxed">function doPost(e) {
+  var sheet = SpreadsheetApp.getActiveSpreadsheet().getActiveSheet();
+  var data = JSON.parse(e.postData.contents);
+  if (sheet.getLastRow() === 0) {
+    sheet.appendRow([
+      "Timestamp", "Full Name", "Email", "Time Taken",
+      "Beginner (1-6)", "Elementary (7-20)", "Pre-Intermediate (21-34)",
+      "Intermediate (35-48)", "Upper Intermediate (49-62)", "Advanced (63-70)",
+      "Final Score (/70)", "Percentage", "English Level", "CEFR Level"
+    ]);
+  }
+  sheet.appendRow([
+    data.submittedAt, data.fullName, data.email, data.timeTaken,
+    data.sections.beginner, data.sections.elementary, data.sections.preIntermediate,
+    data.sections.intermediate, data.sections.upperIntermediate, data.sections.advanced,
+    data.finalScoreText, data.percentage + "%", data.englishLevel, data.cefrLevel
+  ]);
+  return ContentService.createTextOutput(JSON.stringify({ status: "success" }))
+    .setMimeType(ContentService.MimeType.JSON);
+}</pre>
+        </div>
+      </div>
+
+      <!-- Modal Save / Clear Actions -->
+      <div class="flex flex-wrap items-center justify-between gap-3 border-t border-slate-200 pt-4">
+        <button
+          type="button"
+          onclick="clearAdminSettings()"
+          class="px-4 py-2 rounded-xl border border-rose-200 text-rose-700 hover:bg-rose-50 text-xs font-semibold transition cursor-pointer"
+        >
+          Clear Saved Overrides
+        </button>
+        <div class="flex items-center gap-2.5">
+          <span id="adminSavedToast" class="hidden text-xs font-bold text-emerald-600">Settings saved!</span>
+          <button
+            type="button"
+            onclick="closeAdminModal()"
+            class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 text-xs font-semibold transition cursor-pointer"
+          >
+            Close
+          </button>
+          <button
+            type="button"
+            onclick="saveAdminSettings()"
+            class="px-5 py-2 rounded-xl bg-blue-900 hover:bg-blue-800 text-white text-xs font-bold shadow-xs transition cursor-pointer"
+          >
+            Save Configuration
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- CUSTOM CONFIRMATION MODALS (Replaces native alert/confirm)            -->
+  <!-- ===================================================================== -->
+  <!-- 1. Submit Confirmation Modal -->
+  <div id="submitModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <div class="flex items-center gap-3">
+        <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-700 flex items-center justify-center shrink-0">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h3 class="text-lg font-bold text-slate-900">Submit Placement Test?</h3>
+      </div>
+      <p id="submitModalMessage" class="text-sm text-slate-600 leading-relaxed"></p>
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button
+          type="button"
+          onclick="closeSubmitModal()"
+          class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 text-sm font-semibold transition cursor-pointer"
+        >
+          Continue Test
+        </button>
+        <button
+          type="button"
+          onclick="finalizeTest(false)"
+          class="px-5 py-2 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white text-sm font-bold shadow transition cursor-pointer"
+        >
+          Yes, Submit Now
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 2. Time Expired Modal -->
+  <div id="timeUpModal" class="hidden fixed inset-0 z-50 bg-slate-900/70 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4 text-center">
+      <div class="w-12 h-12 rounded-2xl bg-amber-100 text-amber-700 flex items-center justify-center mx-auto">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <circle cx="12" cy="12" r="10"></circle>
+          <polyline points="12 6 12 12 16 14"></polyline>
+        </svg>
+      </div>
+      <h3 class="text-xl font-extrabold text-slate-900">Time Limit Reached</h3>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        Your 30-minute exam session has ended and your answers have been automatically submitted for grading.
+      </p>
+      <div class="pt-2">
+        <button
+          type="button"
+          onclick="closeTimeUpModal()"
+          class="w-full py-2.5 rounded-xl bg-blue-900 hover:bg-blue-800 text-white text-sm font-bold shadow transition cursor-pointer"
+        >
+          View Placement Results
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- 3. Reset Session Confirmation Modal -->
+  <div id="resetModal" class="hidden fixed inset-0 z-50 bg-slate-900/60 backdrop-blur-xs flex items-center justify-center p-4">
+    <div class="bg-white rounded-2xl max-w-md w-full p-6 shadow-2xl border border-slate-200 space-y-4">
+      <h3 class="text-lg font-bold text-slate-900">Start New Candidate Session?</h3>
+      <p class="text-sm text-slate-600 leading-relaxed">
+        This will clear the current candidate's answers and return to the registration screen. Make sure you have saved or printed the current report first.
+      </p>
+      <div class="flex items-center justify-end gap-3 pt-2">
+        <button
+          type="button"
+          onclick="closeResetModal()"
+          class="px-4 py-2 rounded-xl border border-slate-300 text-slate-700 hover:bg-slate-50 text-sm font-semibold transition cursor-pointer"
+        >
+          Cancel
+        </button>
+        <button
+          type="button"
+          onclick="resetApplication()"
+          class="px-5 py-2 rounded-xl bg-rose-600 hover:bg-rose-700 text-white text-sm font-bold shadow transition cursor-pointer"
+        >
+          Reset & Start Over
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===================================================================== -->
+  <!-- JAVASCRIPT APPLICATION LOGIC & QUESTION BANK (ES MODULE + FIREBASE)   -->
+  <!-- ===================================================================== -->
+  <script type="module">
+    import { initializeApp, getApps, deleteApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+    import { getFirestore, collection, addDoc, serverTimestamp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+    /**
+     * =========================================================================
+     * 0. DEPLOYMENT CONFIGURATION (EDIT BEFORE PUSHING TO GITHUB PAGES)
+     * Paste your Firebase Web App credentials and Google Apps Script Web App URL
+     * below so all students automatically submit to your database & sheet.
+     * =========================================================================
+     */
+    const DEFAULT_APP_CONFIG = {
+      firebaseConfig: {
+        apiKey: "",
+        authDomain: "",
+        projectId: "",
+        storageBucket: "",
+        messagingSenderId: "",
+        appId: ""
+      },
+      googleSheetsWebhookUrl: ""
+    };
+
+    const STORAGE_KEY_CONFIG = "language_hub_admin_config_v1";
+
+    function getActiveConfig() {
+      try {
+        const saved = localStorage.getItem(STORAGE_KEY_CONFIG);
+        if (saved) {
+          const parsed = JSON.parse(saved);
+          return {
+            firebaseConfig: {
+              ...DEFAULT_APP_CONFIG.firebaseConfig,
+              ...(parsed.firebaseConfig || {})
+            },
+            googleSheetsWebhookUrl:
+              parsed.googleSheetsWebhookUrl !== undefined
+                ? parsed.googleSheetsWebhookUrl
+                : DEFAULT_APP_CONFIG.googleSheetsWebhookUrl
+          };
+        }
+      } catch (e) {
+        // Ignore storage errors
+      }
+      return JSON.parse(JSON.stringify(DEFAULT_APP_CONFIG));
+    }
+
+    let firestoreDb = null;
+
+    async function initFirebaseInstance() {
+      const cfg = getActiveConfig().firebaseConfig;
+      const isConfigured = Boolean(cfg && cfg.apiKey && cfg.projectId);
+      if (!isConfigured) {
+        firestoreDb = null;
+        return false;
+      }
+      try {
+        const existingApps = getApps();
+        for (const app of existingApps) {
+          await deleteApp(app);
+        }
+        const app = initializeApp(cfg);
+        firestoreDb = getFirestore(app);
+        return true;
+      } catch (err) {
+        console.error("Firebase initialization failed:", err);
+        firestoreDb = null;
+        return false;
+      }
+    }
+
+    // Initialize Firebase on load if configured
+    initFirebaseInstance();
+
+    /**
+     * 1. SECTIONS METADATA (Official Language Hub Mapping)
+     */
+    const SECTIONS = [
+      {
+        id: 0,
+        key: "beginner",
+        title: "Beginner",
+        shortTitle: "1. Beginner",
+        cefr: "A1",
+        start: 1,
+        end: 6,
+        description: "Basic personal information, simple present 'to be' & 'do', prepositions of place, and possessives."
+      },
+      {
+        id: 1,
+        key: "elementary",
+        title: "Elementary",
+        shortTitle: "2. Elementary",
+        cefr: "A1+",
+        start: 7,
+        end: 20,
+        description: "Countable/uncountable nouns, present continuous, comparatives, superlatives, and past simple."
+      },
+      {
+        id: 2,
+        key: "preIntermediate",
+        title: "Pre-Intermediate",
+        shortTitle: "3. Pre-Intermediate",
+        cefr: "A2 / B1",
+        start: 21,
+        end: 34,
+        description: "Present perfect, future intentions, passive voice, first/second conditionals, and past perfect."
+      },
+      {
+        id: 3,
+        key: "intermediate",
+        title: "Intermediate",
+        shortTitle: "4. Intermediate",
+        cefr: "B1 / B1+",
+        start: 35,
+        end: 48,
+        description: "Reported speech, present perfect continuous, modals of deduction, third conditional, and relative clauses."
+      },
+      {
+        id: 4,
+        key: "upperIntermediate",
+        title: "Upper Intermediate",
+        shortTitle: "5. Upper Inter.",
+        cefr: "B2",
+        start: 49,
+        end: 62,
+        description: "Phrasal verbs, future perfect continuous, mixed conditionals, past modals, and nuanced regret structures."
+      },
+      {
+        id: 5,
+        key: "advanced",
+        title: "Advanced",
+        shortTitle: "6. Advanced",
+        cefr: "C1",
+        start: 63,
+        end: 70,
+        description: "Concessive clauses, negative adverbial inversion, complex passive reporting, and advanced modal structures."
+      }
+    ];
+
+    /**
+     * 2. COMPLETE 70-QUESTION BANK & OFFICIAL ANSWER KEY
+     */
+    const QUESTIONS = [
+      // SECTION 1: BEGINNER (1–6)
+      {
+        id: 1,
+        section: 0,
+        lines: [
+          { speaker: "Manager", text: "Where's Mr Davidson?" },
+          { speaker: "Assistant", text: "Oh, he's ___ London today." }
+        ],
+        options: { A: "in", B: "on", C: "to", D: "at" },
+        answer: "A"
+      },
+      {
+        id: 2,
+        section: 0,
+        lines: [
+          { speaker: "Amirah", text: "Do you like cats?" },
+          { speaker: "Chris", text: "No, but there ___ lots of other animals I like." }
+        ],
+        options: { A: "is", B: "be", C: "are", D: "was" },
+        answer: "C"
+      },
+      {
+        id: 3,
+        section: 0,
+        lines: [
+          { speaker: "Andrew", text: "Where ___ Alicia come from?" },
+          { speaker: "Martin", text: "I think she's from the United States." }
+        ],
+        options: { A: "is", B: "do", C: "are", D: "does" },
+        answer: "D"
+      },
+      {
+        id: 4,
+        section: 0,
+        lines: [
+          { speaker: "Teacher", text: "Tell me something about your parents, Lucas." },
+          { speaker: "Student", text: "My mother and father ___ both very tall." }
+        ],
+        options: { A: "is", B: "isn't", C: "are", D: "aren't" },
+        answer: "C"
+      },
+      {
+        id: 5,
+        section: 0,
+        lines: [
+          { speaker: "Ayla", text: "That's a nice table, Sophie! Is it new?" },
+          { speaker: "Sophie", text: "Oh no, it's my ___ old dining table." }
+        ],
+        options: { A: "mother", B: "mothers", C: "mother's", D: "mothers'" },
+        answer: "C"
+      },
+      {
+        id: 6,
+        section: 0,
+        lines: [
+          { speaker: "Emma", text: "What do you do after school?" },
+          { speaker: "Chloe", text: "I often see my friends. Do you visit people, too?" },
+          { speaker: "Emma", text: "No, I ___ go out." }
+        ],
+        options: { A: "often", B: "never", C: "always", D: "sometimes" },
+        answer: "B"
+      },
+
+      // SECTION 2: ELEMENTARY (7–20)
+      {
+        id: 7,
+        section: 1,
+        lines: [
+          { speaker: "Katie", text: "Is Charlotte at school today?" },
+          { speaker: "Laura", text: "No, she ___. She's not well today." }
+        ],
+        options: { A: "isn't", B: "aren't", C: "doesn't", D: "hasn't" },
+        answer: "A"
+      },
+      {
+        id: 8,
+        section: 1,
+        lines: [
+          { speaker: "Alex", text: "I'd like to make a cake. ___ eggs have we got?" },
+          { speaker: "Andrea", text: "Three, I think. Let me check." }
+        ],
+        options: { A: "How big", B: "How much", C: "How many", D: "How long" },
+        answer: "C"
+      },
+      {
+        id: 9,
+        section: 1,
+        lines: [
+          { speaker: "Ifrah", text: "Which bus goes to the hospital?" },
+          { speaker: "Antonia", text: "___ the 236. It stops outside." }
+        ],
+        options: { A: "Get", B: "Got", C: "Gets", D: "Getting" },
+        answer: "A"
+      },
+      {
+        id: 10,
+        section: 1,
+        lines: [
+          { speaker: "Father", text: "Are we ready to go?" },
+          { speaker: "Daughter", text: "No, Mum can't find ___ hat." }
+        ],
+        options: { A: "its", B: "his", C: "her", D: "their" },
+        answer: "C"
+      },
+      {
+        id: 11,
+        section: 1,
+        lines: [
+          { speaker: "Shop Assistant", text: "Can I help you?" },
+          { speaker: "Customer", text: "Yes, I'd like to buy ___ trousers." }
+        ],
+        options: { A: "a", B: "an", C: "this", D: "these" },
+        answer: "D"
+      },
+      {
+        id: 12,
+        section: 1,
+        lines: [
+          { speaker: "Mother", text: "Where's that fish I bought? It was on the table." },
+          { speaker: "Daughter", text: "Oh no! The cat ___ it." }
+        ],
+        options: { A: "eat", B: "eats", C: "is eating", D: "are eating" },
+        answer: "C"
+      },
+      {
+        id: 13,
+        section: 1,
+        lines: [
+          { speaker: "Amanda", text: "I like your new sofa." },
+          { speaker: "Fahima", text: "Thanks. It's ___ comfortable than the other one we had." }
+        ],
+        options: { A: "too", B: "very", C: "much", D: "more" },
+        answer: "D"
+      },
+      {
+        id: 14,
+        section: 1,
+        lines: [
+          { speaker: "Alicia", text: "I'm going to the supermarket. Do you want anything?" },
+          { speaker: "Peter", text: "Could you get ___ milk, please?" }
+        ],
+        options: { A: "a", B: "any", C: "some", D: "every" },
+        answer: "C"
+      },
+      {
+        id: 15,
+        section: 1,
+        lines: [
+          { speaker: "Karina", text: "When do you want to play football?" },
+          { speaker: "Aniqa", text: "I ___ to play tomorrow, because I don't need to go to work." }
+        ],
+        options: { A: "like", B: "likes", C: "liked", D: "'d like" },
+        answer: "D"
+      },
+      {
+        id: 16,
+        section: 1,
+        lines: [
+          { speaker: "Manisha", text: "What did you do at the weekend?" },
+          { speaker: "Nicola", text: "I ___ tennis with my friend on Saturday." }
+        ],
+        options: { A: "play", B: "played", C: "plays", D: "playing" },
+        answer: "B"
+      },
+      {
+        id: 17,
+        section: 1,
+        lines: [
+          { speaker: "Wife", text: "Have we got any cheese in the fridge?" },
+          { speaker: "Husband", text: "No, we haven't. I'm ___ buy some this afternoon." }
+        ],
+        options: { A: "go", B: "go to", C: "going", D: "going to" },
+        answer: "D"
+      },
+      {
+        id: 18,
+        section: 1,
+        lines: [
+          { speaker: "Laura", text: "Where ___ you last Tuesday? I tried to phone you." },
+          { speaker: "Beatriz", text: "Oh, I was visiting my grandmother. I didn't have my phone with me." }
+        ],
+        options: { A: "were", B: "was", C: "are", D: "is" },
+        answer: "A"
+      },
+      {
+        id: 19,
+        section: 1,
+        lines: [
+          { speaker: "Miriam", text: "Are you coming to my party on Tuesday?" },
+          { speaker: "Brian", text: "I'm really sorry, but I ___ to take my daughter to the airport." }
+        ],
+        options: { A: "has", B: "had", C: "have", D: "having" },
+        answer: "C"
+      },
+      {
+        id: 20,
+        section: 1,
+        lines: [
+          { speaker: "Saif", text: "Why do you like running?" },
+          { speaker: "Isabella", text: "Because it's ___ way to keep fit." }
+        ],
+        options: { A: "best", B: "better", C: "the best", D: "the better" },
+        answer: "C"
+      },
+
+      // SECTION 3: PRE-INTERMEDIATE (21–34)
+      {
+        id: 21,
+        section: 2,
+        lines: [
+          { speaker: "Anna", text: "Have you lived here a long time?" },
+          { speaker: "Stefan", text: "Yes, over 40 years. I know ___ of people in this town." }
+        ],
+        options: { A: "any", B: "lots", C: "more", D: "most" },
+        answer: "B"
+      },
+      {
+        id: 22,
+        section: 2,
+        lines: [
+          { speaker: "Josef", text: "Why didn't you come to the cinema last week?" },
+          { speaker: "Chloe", text: "I wanted to but I couldn't. I ___ studying for that test we had on Monday." }
+        ],
+        options: { A: "was", B: "were", C: "am", D: "been" },
+        answer: "A"
+      },
+      {
+        id: 23,
+        section: 2,
+        lines: [
+          { speaker: "Anna", text: "That bird's on the garden table again. I think it's hungry." },
+          { speaker: "Juliana", text: "Yes, look! It ___ eat the bread we put there." }
+        ],
+        options: { A: "is", B: "will", C: "goes to", D: "is going to" },
+        answer: "D"
+      },
+      {
+        id: 24,
+        section: 2,
+        lines: [
+          { speaker: "Sophie", text: "How long ___ married?" },
+          { speaker: "Ying Yue", text: "Two years. I met my husband when I was working in New York." }
+        ],
+        options: { A: "had you got", B: "did you get", C: "have you been", D: "are you being" },
+        answer: "C"
+      },
+      {
+        id: 25,
+        section: 2,
+        lines: [
+          { speaker: "David", text: "Have you ___ that new film yet?" },
+          { speaker: "Susanna", text: "No, I haven't. We could go on Thursday if you like?" }
+        ],
+        options: { A: "see", B: "saw", C: "seen", D: "seeing" },
+        answer: "C"
+      },
+      {
+        id: 26,
+        section: 2,
+        lines: [
+          { speaker: "Shop Assistant", text: "Excuse me, please. Could I get past?" },
+          { speaker: "Customer", text: "Oh, I'm sorry. I'm getting in the way, ___ I?" }
+        ],
+        options: { A: "don't", B: "aren't", C: "can't", D: "haven't" },
+        answer: "B"
+      },
+      {
+        id: 27,
+        section: 2,
+        lines: [
+          { speaker: "Wife", text: "Advertising is a big business for musicians." },
+          { speaker: "Husband", text: "Yes, musicians ___ a lot of money for writing short pieces of music." }
+        ],
+        options: { A: "pay", B: "paid", C: "are paid", D: "are paying" },
+        answer: "C"
+      },
+      {
+        id: 28,
+        section: 2,
+        lines: [
+          { speaker: "Son", text: "Mum, I'd really like a guitar. Can I have one?" },
+          { speaker: "Mother", text: "OK, but if we buy one you ___ have to practise playing it." }
+        ],
+        options: { A: "will", B: "can", C: "could", D: "must" },
+        answer: "A"
+      },
+      {
+        id: 29,
+        section: 2,
+        lines: [
+          { speaker: "Juliana", text: "Do you like Brazilian coffee?" },
+          { speaker: "Miriodere", text: "No I don't, because it's ___ strong." }
+        ],
+        options: { A: "too", B: "such", C: "much", D: "enough" },
+        answer: "A"
+      },
+      {
+        id: 30,
+        section: 2,
+        lines: [
+          { speaker: "Matthew", text: "Would you like anything from the shop?" },
+          { speaker: "Alicia", text: "Yes, I'd like one of ___ celebrity magazines, please." }
+        ],
+        options: { A: "most recent", B: "more recent", C: "the most recent", D: "the more recent" },
+        answer: "C"
+      },
+      {
+        id: 31,
+        section: 2,
+        lines: [
+          { speaker: "Daughter", text: "Mum, my computer is broken again. I really need a new one." },
+          { speaker: "Mother", text: "I ___ buy one if we had the money, but it's not possible right now." }
+        ],
+        options: { A: "will", B: "may", C: "should", D: "would" },
+        answer: "D"
+      },
+      {
+        id: 32,
+        section: 2,
+        lines: [
+          { speaker: "Mother", text: "___ you packed your suitcase yet? We're leaving early tomorrow morning." },
+          { speaker: "Son", text: "I'll do it later. It won't take long." }
+        ],
+        options: { A: "Did", B: "Have", C: "Will", D: "Are" },
+        answer: "B"
+      },
+      {
+        id: 33,
+        section: 2,
+        lines: [
+          { speaker: "Lucas", text: "Do you play the piano, Natasha?" },
+          { speaker: "Natasha", text: "Well, I ___ play when I was younger, but I'm not sure I remember now." }
+        ],
+        options: { A: "can", B: "can't", C: "could", D: "couldn't" },
+        answer: "C"
+      },
+      {
+        id: 34,
+        section: 2,
+        lines: [
+          { speaker: "Martina", text: "What did the doctor say about your stomach pains?" },
+          { speaker: "Padma", text: "He asked me what I ___ for the last two days." }
+        ],
+        options: { A: "eat", B: "had eaten", C: "was eating", D: "would eat" },
+        answer: "B"
+      },
+
+      // SECTION 4: INTERMEDIATE (35–48)
+      {
+        id: 35,
+        section: 3,
+        lines: [
+          { speaker: "Daughter", text: "Everyone has arrived apart from Pamela." },
+          { speaker: "Mother", text: "Don't worry, she phoned me this morning and said she ___ be a bit late." }
+        ],
+        options: { A: "can", B: "must", C: "should", D: "would" },
+        answer: "D"
+      },
+      {
+        id: 36,
+        section: 3,
+        lines: [
+          { speaker: "Vincent", text: "Did you see the weather forecast? It's going to be extremely hot this weekend." },
+          { speaker: "Pauline", text: "I know, I can't believe it! It ___ since Monday." }
+        ],
+        options: { A: "rains", B: "has been raining", C: "is raining", D: "was raining" },
+        answer: "B"
+      },
+      {
+        id: 37,
+        section: 3,
+        lines: [
+          { speaker: "Ameena", text: "What colour are you going to paint the living room?" },
+          { speaker: "Charlotte", text: "I ___ probably choose something bright, like yellow." }
+        ],
+        options: { A: "will", B: "may", C: "can", D: "might" },
+        answer: "A"
+      },
+      {
+        id: 38,
+        section: 3,
+        lines: [
+          { speaker: "Victor", text: "I'd love to go back in history to see how people lived hundreds of years ago." },
+          { speaker: "Simon", text: "Me too! If I ___ choose, I'd probably travel to ancient Rome." }
+        ],
+        options: { A: "can", B: "will", C: "could", D: "would" },
+        answer: "C"
+      },
+      {
+        id: 39,
+        section: 3,
+        lines: [
+          { speaker: "Stephen", text: "The concert was fantastic yesterday. You ___ have come." },
+          { speaker: "Yuuto", text: "I know. I wanted to, but I had to work late." }
+        ],
+        options: { A: "must", B: "could", C: "ought", D: "should" },
+        answer: "D"
+      },
+      {
+        id: 40,
+        section: 3,
+        lines: [
+          { speaker: "Katie", text: "Would you like to go sightseeing or to the beach this afternoon?" },
+          { speaker: "Matthew", text: "I don't mind, I'll let you decide." },
+          { speaker: "Katie", text: "OK, let's go sightseeing, ___ we?" }
+        ],
+        options: { A: "should", B: "shall", C: "might", D: "would" },
+        answer: "B"
+      },
+      {
+        id: 41,
+        section: 3,
+        lines: [
+          { speaker: "Amanda", text: "It said on the news that the president also owns all the national newspapers." },
+          { speaker: "Andrew", text: "That ___ be right! I don't think that's true." }
+        ],
+        options: { A: "must", B: "can't", C: "won't", D: "would" },
+        answer: "B"
+      },
+      {
+        id: 42,
+        section: 3,
+        lines: [
+          { speaker: "Assistant", text: "That meeting was really difficult. What would you have done if you ___ in my position?" },
+          { speaker: "Manager", text: "Oh, I think you managed it very well." }
+        ],
+        options: { A: "are", B: "were", C: "had been", D: "would be" },
+        answer: "C"
+      },
+      {
+        id: 43,
+        section: 3,
+        lines: [
+          { speaker: "Natalia", text: "My new smartphone doesn't seem to work." },
+          { speaker: "Katie", text: "Oh dear! Perhaps you should take it ___ and ask for a refund." }
+        ],
+        options: { A: "up", B: "out", C: "away", D: "back" },
+        answer: "D"
+      },
+      {
+        id: 44,
+        section: 3,
+        lines: [
+          { speaker: "Chris", text: "I wish I could be with our cousins." },
+          { speaker: "Alison", text: "Me too! By this time tomorrow they ___ on a Greek beach while we're revising for our history test." }
+        ],
+        options: { A: "sunbathe", B: "will sunbathe", C: "will be sunbathing", D: "will have sunbathed" },
+        answer: "C"
+      },
+      {
+        id: 45,
+        section: 3,
+        lines: [
+          { speaker: "Son", text: "Are you OK, Mum? You don't seem very relaxed." },
+          { speaker: "Mother", text: "I just wish I ___ an aisle seat so that I could get up and walk around more easily." }
+        ],
+        options: { A: "had chosen", B: "have chosen", C: "would choose", D: "should choose" },
+        answer: "A"
+      },
+      {
+        id: 46,
+        section: 3,
+        lines: [
+          { speaker: "Nicola", text: "I love this picture, but won't it cost a fortune?" },
+          { speaker: "Victor", text: "No, it's just a copy. The original, ___ is a portrait of the artist's friend, sold for €4 million!" }
+        ],
+        options: { A: "whose", B: "which", C: "whom", D: "that" },
+        answer: "B"
+      },
+      {
+        id: 47,
+        section: 3,
+        lines: [
+          { speaker: "Laura", text: "I can't believe how talented this artist was." },
+          { speaker: "Emily", text: "I know, it's amazing. ___ he was almost 90 when he did them, his paintings are beautiful." }
+        ],
+        options: { A: "Since", B: "Besides", C: "Although", D: "Therefore" },
+        answer: "C"
+      },
+      {
+        id: 48,
+        section: 3,
+        lines: [
+          { speaker: "Andrea", text: "I want to buy some new shoes for the winter." },
+          { speaker: "Shan", text: "Well, I ___ looking for a new pair of boots for weeks, but I can't find anything I like." }
+        ],
+        options: { A: "am", B: "was", C: "had been", D: "have been" },
+        answer: "D"
+      },
+
+      // SECTION 5: UPPER INTERMEDIATE (49–62)
+      {
+        id: 49,
+        section: 4,
+        lines: [
+          { speaker: "Client", text: "I don't have much money - just enough to ___." },
+          { speaker: "Accountant", text: "Well, let me suggest a way of helping you save more." }
+        ],
+        options: { A: "get by", B: "pay off", C: "do with", D: "make up" },
+        answer: "A"
+      },
+      {
+        id: 50,
+        section: 4,
+        lines: [
+          { speaker: "Pablo", text: "In April next year I ___ here for ten years exactly." },
+          { speaker: "Alison", text: "Wow! It really doesn't seem that long." }
+        ],
+        options: { A: "will live", B: "will be living", C: "am going to live", D: "will have been living" },
+        answer: "D"
+      },
+      {
+        id: 51,
+        section: 4,
+        lines: [
+          { speaker: "Student", text: "Is it true that it took Bell and Watson ages to invent the telephone?" },
+          { speaker: "Teacher", text: "Yes. When they finally succeeded, they ___ on it for about 30 years." }
+        ],
+        options: { A: "must work", B: "had been working", C: "have worked", D: "would be working" },
+        answer: "B"
+      },
+      {
+        id: 52,
+        section: 4,
+        lines: [
+          { speaker: "Rachel", text: "This would be a lovely place to sit on a dry day." },
+          { speaker: "Natasha", text: "Yes, I know, I just wish the rain ___." }
+        ],
+        options: { A: "would stop", B: "has stopped", C: "will have stopped", D: "would be stopping" },
+        answer: "A"
+      },
+      {
+        id: 53,
+        section: 4,
+        lines: [
+          { speaker: "Student", text: "What's today's lesson going to be about?" },
+          { speaker: "Teacher", text: "Today we're going to learn about a tribe ___ descendants live in Lima, the capital of Peru." }
+        ],
+        options: { A: "who", B: "which", C: "whose", D: "whom" },
+        answer: "C"
+      },
+      {
+        id: 54,
+        section: 4,
+        lines: [
+          { speaker: "Andrea", text: "Did your town have a good market?" },
+          { speaker: "Katie", text: "Yes. When I was young we ___ there every Saturday looking for bargains." }
+        ],
+        options: { A: "had gone", B: "would go", C: "were going", D: "had been going" },
+        answer: "B"
+      },
+      {
+        id: 55,
+        section: 4,
+        lines: [
+          { speaker: "Daughter", text: "Joanna has been really supportive. I'm so lucky to have her as a friend." },
+          { speaker: "Mother", text: "Yes. Just think, if you hadn't sat next to her in class at school, you ___ so close now." }
+        ],
+        options: { A: "won't be", B: "wouldn't be", C: "wouldn't have been", D: "aren't" },
+        answer: "B"
+      },
+      {
+        id: 56,
+        section: 4,
+        lines: [
+          { speaker: "David", text: "Did you see the headline this evening?" },
+          { speaker: "Nicola", text: "Yes, the Prime Minister was ___ to resign today." }
+        ],
+        options: { A: "charged", B: "argued", C: "struggled", D: "forced" },
+        answer: "D"
+      },
+      {
+        id: 57,
+        section: 4,
+        lines: [
+          { speaker: "Student", text: "I'm concerned about the chemical test results I've just had from the river." },
+          { speaker: "Professor", text: "It ___ be a good idea to check the acid levels as well then." }
+        ],
+        options: { A: "must", B: "should", C: "might", D: "ought" },
+        answer: "C"
+      },
+      {
+        id: 58,
+        section: 4,
+        lines: [
+          { speaker: "Aamir", text: "They've just announced that our train has been delayed." },
+          { speaker: "Laura", text: "That's annoying. We ___ have rushed to get here after all." }
+        ],
+        options: { A: "needn't", B: "could", C: "should", D: "mustn't" },
+        answer: "A"
+      },
+      {
+        id: 59,
+        section: 4,
+        lines: [
+          { speaker: "Liam", text: "So, your Dad's got a laptop!" },
+          { speaker: "Cian", text: "Yes, I bought it for him last year - until then he ___ a typewriter!" }
+        ],
+        options: { A: "used", B: "has used", C: "has been using", D: "had been using" },
+        answer: "D"
+      },
+      {
+        id: 60,
+        section: 4,
+        lines: [
+          { speaker: "Isabella", text: "The flight is fully booked, so I won't be able to go to Barbados next week." },
+          { speaker: "Safia", text: "If you ___ the ticket sooner, you'd have found a seat." }
+        ],
+        options: { A: "had booked", B: "were booking", C: "booked", D: "would have booked" },
+        answer: "A"
+      },
+      {
+        id: 61,
+        section: 4,
+        lines: [
+          { speaker: "Receptionist", text: "You ___ taken a taxi to the hotel since you arrived so late." },
+          { speaker: "Customer", text: "It was OK, actually. There was a direct bus service from the airport." }
+        ],
+        options: { A: "will have", B: "should have", C: "might have", D: "would have" },
+        answer: "B"
+      },
+      {
+        id: 62,
+        section: 4,
+        lines: [
+          { speaker: "Sophie", text: "Have they finished interviewing for the manager's position yet?" },
+          { speaker: "Rafi", text: "No, but they ___ all the candidates by next Friday." }
+        ],
+        options: { A: "won't see", B: "would see", C: "haven't seen", D: "will have seen" },
+        answer: "D"
+      },
+
+      // SECTION 6: ADVANCED (63–70)
+      {
+        id: 63,
+        section: 5,
+        lines: [
+          { speaker: "Athlete", text: "___ hard I try, I can't run any faster." },
+          { speaker: "Coach", text: "You've improved a lot. I wouldn't worry about it." }
+        ],
+        options: { A: "Though", B: "Whereas", C: "However", D: "Considering" },
+        answer: "C"
+      },
+      {
+        id: 64,
+        section: 5,
+        lines: [
+          { speaker: "Laura", text: "That's a really beautiful painting. The colours are so vivid." },
+          { speaker: "Jeremy", text: "Yes, it's amazing to think it was lost for years and ___." }
+        ],
+        options: { A: "must be restored", B: "had to be restored", C: "has been restoring", D: "would be restoring" },
+        answer: "B"
+      },
+      {
+        id: 65,
+        section: 5,
+        lines: [
+          { speaker: "Charlotte", text: "I saw the photos from the film festival. Was that you with the actor from The Hobbit?" },
+          { speaker: "Niall", text: "Yes, it was! ___ did I imagine I would ever actually meet him." }
+        ],
+        options: { A: "Not", B: "Much", C: "Hardly", D: "Little" },
+        answer: "D"
+      },
+      {
+        id: 66,
+        section: 5,
+        lines: [
+          { speaker: "Pauline", text: "I hear you got soaked on the golf course this morning." },
+          { speaker: "Chris", text: "Yes. I wish I ___ listened to the weather forecast." }
+        ],
+        options: { A: "had", B: "have", C: "would have", D: "should have" },
+        answer: "A"
+      },
+      {
+        id: 67,
+        section: 5,
+        lines: [
+          { speaker: "Laura", text: "How was the meeting?" },
+          { speaker: "Ricardo", text: "It finished late because Victor didn't arrive until 5 pm. He told me he ___ been given the wrong directions." }
+        ],
+        options: { A: "has", B: "had", C: "should have", D: "would have" },
+        answer: "B"
+      },
+      {
+        id: 68,
+        section: 5,
+        lines: [
+          { speaker: "Andrew", text: "I picked up some of that cat food you wanted." },
+          { speaker: "Pedro", text: "Oh good. Once ___ to these new cat biscuits, they won't want to go back to the other stuff." }
+        ],
+        options: { A: "we've switched", B: "we'll be switching", C: "we'll have switched", D: "we've been switched" },
+        answer: "A"
+      },
+      {
+        id: 69,
+        section: 5,
+        lines: [
+          { speaker: "Antonia", text: "Has your son done well in his exams?" },
+          { speaker: "Phillip", text: "Yes. Only once ___ he wasn't sufficiently prepared, but he can take that one again." }
+        ],
+        options: { A: "he found", B: "he has found", C: "did he find", D: "could he find" },
+        answer: "C"
+      },
+      {
+        id: 70,
+        section: 5,
+        lines: [
+          { speaker: "Son", text: "I had a bit of a stomach ache this morning." },
+          { speaker: "Mother", text: "Oh dear! Well, I did say you ___ eaten that chicken last night." }
+        ],
+        options: { A: "wouldn't have", B: "couldn't have", C: "mustn't have", D: "shouldn't have" },
+        answer: "D"
+      }
+    ];
+
+    /**
+     * 3. APPLICATION STATE
+     */
+    const TOTAL_SECONDS = 30 * 60; // 30 minutes
+    let state = {
+      student: {
+        firstName: "",
+        lastName: "",
+        email: ""
+      },
+      currentSectionIndex: 0,
+      userAnswers: {}, // { [questionId]: "A" | "B" | "C" | "D" }
+      secondsRemaining: TOTAL_SECONDS,
+      timerInterval: null,
+      startTime: null,
+      endTime: null,
+      isSubmitted: false,
+      lastReportText: "",
+      lastPayload: null
+    };
+
+    /**
+     * 4. REGISTRATION & TEST INITIALIZATION
+     */
+    document.getElementById("registrationForm").addEventListener("submit", function (e) {
+      e.preventDefault();
+
+      const firstNameInput = document.getElementById("firstName");
+      const lastNameInput = document.getElementById("lastName");
+      const emailInput = document.getElementById("email");
+
+      const firstName = firstNameInput.value.trim();
+      const lastName = lastNameInput.value.trim();
+      const email = emailInput.value.trim();
+
+      let isValid = true;
+
+      // Validate First Name
+      if (!firstName) {
+        document.getElementById("firstNameError").classList.remove("hidden");
+        firstNameInput.classList.add("border-rose-500", "ring-1", "ring-rose-500");
+        isValid = false;
+      } else {
+        document.getElementById("firstNameError").classList.add("hidden");
+        firstNameInput.classList.remove("border-rose-500", "ring-1", "ring-rose-500");
+      }
+
+      // Validate Last Name
+      if (!lastName) {
+        document.getElementById("lastNameError").classList.remove("hidden");
+        lastNameInput.classList.add("border-rose-500", "ring-1", "ring-rose-500");
+        isValid = false;
+      } else {
+        document.getElementById("lastNameError").classList.add("hidden");
+        lastNameInput.classList.remove("border-rose-500", "ring-1", "ring-rose-500");
+      }
+
+      // Validate Email Address
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email || !emailRegex.test(email)) {
+        document.getElementById("emailError").classList.remove("hidden");
+        emailInput.classList.add("border-rose-500", "ring-1", "ring-rose-500");
+        isValid = false;
+      } else {
+        document.getElementById("emailError").classList.add("hidden");
+        emailInput.classList.remove("border-rose-500", "ring-1", "ring-rose-500");
+      }
+
+      if (!isValid) return;
+
+      // Save candidate info & start test
+      state.student = { firstName, lastName, email };
+      state.startTime = new Date();
+      state.secondsRemaining = TOTAL_SECONDS;
+      state.currentSectionIndex = 0;
+      state.isSubmitted = false;
+
+      startExamSession();
+    });
+
+    function startExamSession() {
+      // Switch Views
+      document.getElementById("welcomeView").classList.add("hidden");
+      document.getElementById("resultsView").classList.add("hidden");
+      document.getElementById("examView").classList.remove("hidden");
+
+      // Show Header Controls & Progress Bar
+      document.getElementById("examHeaderControls").classList.remove("hidden");
+      document.getElementById("headerProgressBarContainer").classList.remove("hidden");
+
+      // Populate Candidate Strip
+      document.getElementById("displayCandidateName").textContent = `${state.student.firstName} ${state.student.lastName}`;
+      document.getElementById("displayCandidateEmail").textContent = state.student.email;
+
+      // Render Tabs & First Section
+      renderSectionTabs();
+      renderCurrentSection();
+      updateProgressCounters();
+
+      // Start Countdown Timer
+      startTimer();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /**
+     * 5. COUNTDOWN TIMER (30 MINUTES)
+     */
+    function startTimer() {
+      if (state.timerInterval) clearInterval(state.timerInterval);
+      updateTimerDisplay();
+
+      state.timerInterval = setInterval(() => {
+        if (state.secondsRemaining <= 0) {
+          clearInterval(state.timerInterval);
+          finalizeTest(true);
+          return;
+        }
+        state.secondsRemaining--;
+        updateTimerDisplay();
+      }, 1000);
+    }
+
+    function updateTimerDisplay() {
+      const mins = Math.floor(state.secondsRemaining / 60);
+      const secs = state.secondsRemaining % 60;
+      const formatted = `${String(mins).padStart(2, "0")}:${String(secs).padStart(2, "0")}`;
+      const displayEl = document.getElementById("timerDisplay");
+      const timerBox = document.getElementById("timerBox");
+
+      displayEl.textContent = formatted;
+
+      // Warning styling under 5 minutes
+      if (state.secondsRemaining <= 300) {
+        timerBox.classList.remove("bg-blue-950/80", "border-blue-700/60");
+        timerBox.classList.add("bg-rose-900/90", "border-rose-500", "animate-pulse");
+        displayEl.classList.add("text-rose-200");
+      } else {
+        timerBox.classList.add("bg-blue-950/80", "border-blue-700/60");
+        timerBox.classList.remove("bg-rose-900/90", "border-rose-500", "animate-pulse");
+        displayEl.classList.remove("text-rose-200");
+      }
+    }
+
+    /**
+     * 6. SECTION TABS & QUESTION RENDERING
+     */
+    function renderSectionTabs() {
+      const container = document.getElementById("sectionTabsContainer");
+      container.innerHTML = "";
+
+      SECTIONS.forEach((sec, idx) => {
+        const secQuestions = QUESTIONS.filter((q) => q.section === idx);
+        const answeredInSec = secQuestions.filter((q) => Boolean(state.userAnswers[q.id])).length;
+        const isComplete = answeredInSec === secQuestions.length;
+        const isActive = idx === state.currentSectionIndex;
+
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.setAttribute("role", "tab");
+        btn.setAttribute("aria-selected", isActive ? "true" : "false");
+        btn.onclick = () => {
+          state.currentSectionIndex = idx;
+          renderSectionTabs();
+          renderCurrentSection();
+          window.scrollTo({ top: 0, behavior: "smooth" });
+        };
+
+        let classes = "shrink-0 px-3.5 py-2 rounded-xl text-xs font-semibold border transition flex items-center gap-2 cursor-pointer ";
+        if (isActive) {
+          classes += "bg-blue-900 text-white border-blue-900 shadow-xs";
+        } else if (isComplete) {
+          classes += "bg-emerald-50 text-emerald-800 border-emerald-200 hover:bg-emerald-100";
+        } else {
+          classes += "bg-slate-50 text-slate-600 border-slate-200 hover:bg-slate-100";
+        }
+        btn.className = classes;
+
+        btn.innerHTML = `
+          <span>${sec.shortTitle}</span>
+          <span class="px-1.5 py-0.5 rounded-md text-[11px] font-bold ${
+            isActive
+              ? "bg-white/20 text-white"
+              : isComplete
+              ? "bg-emerald-200/80 text-emerald-900"
+              : "bg-slate-200/80 text-slate-700"
+          }">${answeredInSec}/${secQuestions.length}</span>
+        `;
+
+        container.appendChild(btn);
+      });
+    }
+
+    function renderCurrentSection() {
+      const sec = SECTIONS[state.currentSectionIndex];
+      const secQuestions = QUESTIONS.filter((q) => q.section === state.currentSectionIndex);
+      const answeredCount = secQuestions.filter((q) => Boolean(state.userAnswers[q.id])).length;
+
+      // Update Section Banner
+      document.getElementById("currentSectionBadge").textContent = `Section ${sec.id + 1} of ${SECTIONS.length}`;
+      document.getElementById("currentSectionRange").textContent = `Questions ${sec.start} – ${sec.end} • CEFR ${sec.cefr}`;
+      document.getElementById("currentSectionTitle").textContent = sec.title;
+      document.getElementById("currentSectionDesc").textContent = sec.description;
+      document.getElementById("currentSectionProgressText").textContent = `${answeredCount} / ${secQuestions.length} answered`;
+
+      // Render Question Cards
+      const container = document.getElementById("questionsContainer");
+      container.innerHTML = "";
+
+      secQuestions.forEach((q) => {
+        const selectedOpt = state.userAnswers[q.id] || null;
+        const card = document.createElement("article");
+        card.className = `bg-white rounded-2xl p-5 sm:p-6 shadow-xs border transition ${
+          selectedOpt ? "border-blue-200 bg-blue-50/10" : "border-slate-200/90"
+        }`;
+
+        // Format dialogue lines, highlighting the blank `___`
+        const dialogueHtml = q.lines
+          .map((line) => {
+            const replacement = selectedOpt
+              ? `<span class="inline-block px-2.5 py-0.5 mx-1 rounded-md bg-blue-100 text-blue-900 font-bold border border-blue-300">${q.options[selectedOpt]}</span>`
+              : `<span class="inline-block w-16 border-b-2 border-slate-400 mx-1 text-center text-blue-700 font-bold">&nbsp;</span>`;
+
+            const formattedText = escapeHtml(line.text).replace("___", replacement);
+            return `
+              <p class="text-sm sm:text-base text-slate-800 leading-relaxed">
+                <span class="font-bold text-slate-900">${escapeHtml(line.speaker)}:</span> ${formattedText}
+              </p>
+            `;
+          })
+          .join("");
+
+        // Render A, B, C, D option buttons
+        const optionsHtml = ["A", "B", "C", "D"]
+          .map((letter) => {
+            const isChecked = selectedOpt === letter;
+            return `
+              <button
+                type="button"
+                onclick="selectAnswer(${q.id}, '${letter}')"
+                aria-pressed="${isChecked}"
+                class="option-card text-left w-full p-3 sm:p-3.5 rounded-xl border text-sm flex items-center gap-3 cursor-pointer ${
+                  isChecked
+                    ? "bg-blue-900 text-white border-blue-900 shadow-sm font-semibold"
+                    : "bg-slate-50/70 hover:bg-blue-50/70 text-slate-800 border-slate-200 hover:border-blue-300 font-medium"
+                }"
+              >
+                <span class="w-7 h-7 rounded-lg flex items-center justify-center text-xs font-extrabold shrink-0 ${
+                  isChecked ? "bg-emerald-400 text-blue-950" : "bg-white border border-slate-300 text-slate-700"
+                }">
+                  ${letter}
+                </span>
+                <span class="leading-snug">${escapeHtml(q.options[letter])}</span>
+              </button>
+            `;
+          })
+          .join("");
+
+        card.innerHTML = `
+          <div class="flex items-start gap-3.5">
+            <span class="w-8 h-8 rounded-xl flex items-center justify-center text-xs font-extrabold shrink-0 mt-0.5 ${
+              selectedOpt ? "bg-blue-900 text-white" : "bg-slate-100 text-slate-700 border border-slate-200"
+            }">
+              ${q.id}
+            </span>
+            <div class="flex-1 space-y-4">
+              <div class="space-y-1.5">
+                ${dialogueHtml}
+              </div>
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2.5 pt-1">
+                ${optionsHtml}
+              </div>
+            </div>
+          </div>
+        `;
+
+        container.appendChild(card);
+      });
+
+      // Update Bottom Navigation Buttons
+      const prevBtn = document.getElementById("prevSectionBtn");
+      const nextBtn = document.getElementById("nextSectionBtn");
+      const finishBtn = document.getElementById("bottomFinishBtn");
+
+      prevBtn.disabled = state.currentSectionIndex === 0;
+
+      if (state.currentSectionIndex === SECTIONS.length - 1) {
+        nextBtn.classList.add("hidden");
+        finishBtn.classList.remove("hidden");
+      } else {
+        nextBtn.classList.remove("hidden");
+        finishBtn.classList.add("hidden");
+      }
+    }
+
+    function selectAnswer(questionId, optionLetter) {
+      state.userAnswers[questionId] = optionLetter;
+      renderSectionTabs();
+      renderCurrentSection();
+      updateProgressCounters();
+    }
+
+    function navigateSection(delta) {
+      const target = state.currentSectionIndex + delta;
+      if (target >= 0 && target < SECTIONS.length) {
+        state.currentSectionIndex = target;
+        renderSectionTabs();
+        renderCurrentSection();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+      }
+    }
+
+    function updateProgressCounters() {
+      const totalAnswered = Object.keys(state.userAnswers).length;
+      const pct = Math.round((totalAnswered / QUESTIONS.length) * 100);
+
+      document.getElementById("headerAnsweredCount").textContent = `${totalAnswered} / ${QUESTIONS.length}`;
+      document.getElementById("footerAnsweredCount").textContent = `${totalAnswered} of ${QUESTIONS.length}`;
+      document.getElementById("headerProgressBar").style.width = `${pct}%`;
+    }
+
+    /**
+     * 7. SUBMISSION MODALS & SCORING ENGINE
+     */
+    function openSubmitModal() {
+      const totalAnswered = Object.keys(state.userAnswers).length;
+      const unanswered = QUESTIONS.length - totalAnswered;
+      const msgEl = document.getElementById("submitModalMessage");
+
+      if (unanswered > 0) {
+        msgEl.innerHTML = `You have answered <strong class="text-slate-900">${totalAnswered} out of 70</strong> questions (<span class="text-amber-700 font-semibold">${unanswered} unanswered</span>). Unanswered questions will be marked as incorrect. Are you ready to submit?`;
+      } else {
+        msgEl.innerHTML = `Excellent! You have answered all <strong class="text-emerald-700">70 out of 70</strong> questions. Click <strong>Yes, Submit Now</strong> to view your score and placement level.`;
+      }
+
+      document.getElementById("submitModal").classList.remove("hidden");
+    }
+
+    function closeSubmitModal() {
+      document.getElementById("submitModal").classList.add("hidden");
+    }
+
+    function closeTimeUpModal() {
+      document.getElementById("timeUpModal").classList.add("hidden");
+    }
+
+    function openResetModal() {
+      document.getElementById("resetModal").classList.remove("hidden");
+    }
+
+    function closeResetModal() {
+      document.getElementById("resetModal").classList.add("hidden");
+    }
+
+    function finalizeTest(isAutoSubmit) {
+      if (state.isSubmitted) return;
+      state.isSubmitted = true;
+
+      if (state.timerInterval) clearInterval(state.timerInterval);
+      closeSubmitModal();
+      state.endTime = new Date();
+
+      if (isAutoSubmit) {
+        document.getElementById("timeUpModal").classList.remove("hidden");
+      }
+
+      calculateAndRenderResults();
+    }
+
+    /**
+     * Official Language Hub Placement Scoring Logic
+     * - 0–6: Beginner (A1)
+     * - 7–17: Elementary (A1+)
+     * - 18–34: Pre-Intermediate (A2/B1)
+     * - 35–48: Intermediate (B1/B1+)
+     * - 49–60: Upper Intermediate (B2)
+     * - 61–70: Advanced (C1)
+     */
+    function getPlacementDetails(score) {
+      if (score <= 6) {
+        return {
+          levelTitle: "Language Hub Beginner",
+          shortLevel: "Beginner",
+          cefr: "CEFR A1",
+          description:
+            "You are ready to begin at the foundational level. You will build confidence with essential everyday vocabulary, basic present tenses, and simple conversational exchanges."
+        };
+      } else if (score <= 17) {
+        return {
+          levelTitle: "Language Hub Elementary",
+          shortLevel: "Elementary",
+          cefr: "CEFR A1+",
+          description:
+            "You can handle basic everyday communication, simple past events, and familiar topics. This course will solidify your core grammar and expand your practical fluency."
+        };
+      } else if (score <= 34) {
+        const halfNote =
+          score >= 27
+            ? " With a score of 27 or above, you are well-positioned for the second half of the Pre-Intermediate syllabus."
+            : "";
+        return {
+          levelTitle: "Language Hub Pre-Intermediate",
+          shortLevel: "Pre-Intermediate",
+          cefr: "CEFR A2 / B1",
+          description:
+            "You have a solid grasp of basic tenses and everyday structures. At this level, you will develop fluency with present perfect, future forms, conditionals, and connected speech." +
+            halfNote
+        };
+      } else if (score <= 48) {
+        return {
+          levelTitle: "Language Hub Intermediate",
+          shortLevel: "Intermediate",
+          cefr: "CEFR B1 / B1+",
+          description:
+            "You can communicate independently across a wide range of familiar and abstract topics. This course refines complex tenses, reported speech, modals of deduction, and nuanced expression."
+        };
+      } else if (score <= 60) {
+        return {
+          levelTitle: "Language Hub Upper Intermediate",
+          shortLevel: "Upper Intermediate",
+          cefr: "CEFR B2",
+          description:
+            "You demonstrate strong command of English grammar and idiomatic structures. You are ready to tackle sophisticated texts, mixed conditionals, subtle modal nuances, and academic/professional discourse."
+        };
+      } else {
+        return {
+          levelTitle: "Language Hub Advanced",
+          shortLevel: "Advanced",
+          cefr: "CEFR C1",
+          description:
+            "Congratulations! Scoring above 60 demonstrates an advanced command of English grammar, inversion, complex clause structures, and nuanced vocabulary."
+        };
+      }
+    }
+
+    function calculateAndRenderResults() {
+      // Hide Exam View & Header Controls
+      document.getElementById("examView").classList.add("hidden");
+      document.getElementById("examHeaderControls").classList.add("hidden");
+      document.getElementById("headerProgressBarContainer").classList.add("hidden");
+      document.getElementById("resultsView").classList.remove("hidden");
+
+      // Calculate Overall Score
+      let totalCorrect = 0;
+      const totalAttempted = Object.keys(state.userAnswers).length;
+
+      QUESTIONS.forEach((q) => {
+        if (state.userAnswers[q.id] === q.answer) {
+          totalCorrect++;
+        }
+      });
+
+      const accuracyPct = Math.round((totalCorrect / QUESTIONS.length) * 100);
+      const placement = getPlacementDetails(totalCorrect);
+
+      // Calculate Duration
+      const elapsedSeconds = Math.max(1, TOTAL_SECONDS - state.secondsRemaining);
+      const elapsedMins = Math.floor(elapsedSeconds / 60);
+      const elapsedSecs = elapsedSeconds % 60;
+      const timeTakenFormatted = `${elapsedMins}m ${String(elapsedSecs).padStart(2, "0")}s`;
+
+      // Populate Candidate & Summary Metadata
+      const fullName = `${state.student.firstName} ${state.student.lastName}`;
+      const completedDateStr = state.endTime.toLocaleString("en-US", {
+        dateStyle: "long",
+        timeStyle: "short"
+      });
+
+      document.getElementById("resultTimestamp").textContent = `Completed on ${completedDateStr}`;
+      document.getElementById("resStudentName").textContent = fullName;
+      document.getElementById("resStudentEmail").textContent = state.student.email;
+      document.getElementById("resTimeTaken").textContent = timeTakenFormatted;
+
+      document.getElementById("resRawScore").textContent = totalCorrect;
+      document.getElementById("resPercentagePill").textContent = `${accuracyPct}% Overall Score`;
+      document.getElementById("resAttemptedText").textContent = `${totalAttempted} of 70 questions attempted`;
+
+      document.getElementById("resCefrBadge").textContent = placement.cefr;
+      document.getElementById("resLevelTitle").textContent = placement.levelTitle;
+      document.getElementById("resLevelDescription").textContent = placement.description;
+
+      // Render Section-by-Section Breakdown & Build Structured Payload
+      const breakdownContainer = document.getElementById("sectionBreakdownContainer");
+      breakdownContainer.innerHTML = "";
+      let sectionSummaryLines = [];
+      const sectionPayloadMap = {};
+      const sectionNumericMap = {};
+
+      SECTIONS.forEach((sec, idx) => {
+        const secQuestions = QUESTIONS.filter((q) => q.section === idx);
+        const secCorrect = secQuestions.filter((q) => state.userAnswers[q.id] === q.answer).length;
+        const secPct = Math.round((secCorrect / secQuestions.length) * 100);
+
+        sectionPayloadMap[sec.key] = `${secCorrect}/${secQuestions.length}`;
+        sectionNumericMap[sec.key] = {
+          score: secCorrect,
+          total: secQuestions.length,
+          percentage: secPct
+        };
+
+        sectionSummaryLines.push(`- ${sec.title} (Q${sec.start}–${sec.end}): ${secCorrect}/${secQuestions.length} (${secPct}%)`);
+
+        let barColor = "bg-blue-600";
+        if (secPct >= 75) barColor = "bg-emerald-500";
+        else if (secPct < 40) barColor = "bg-amber-500";
+
+        const card = document.createElement("div");
+        card.className = "bg-slate-50 border border-slate-200/90 rounded-xl p-4 space-y-2.5";
+        card.innerHTML = `
+          <div class="flex items-center justify-between">
+            <div>
+              <div class="text-xs font-bold text-slate-400 uppercase">Section ${idx + 1} • Q${sec.start}–${sec.end}</div>
+              <div class="text-sm font-bold text-slate-900">${sec.title}</div>
+            </div>
+            <div class="text-right">
+              <span class="text-base font-extrabold text-slate-900">${secCorrect}</span>
+              <span class="text-xs font-semibold text-slate-500">/ ${secQuestions.length}</span>
+            </div>
+          </div>
+          <div class="w-full bg-slate-200 h-2 rounded-full overflow-hidden">
+            <div class="${barColor} h-2 rounded-full" style="width: ${secPct}%"></div>
+          </div>
+          <div class="flex items-center justify-between text-[11px] text-slate-500 font-medium">
+            <span>${sec.cefr}</span>
+            <span>${secPct}% correct</span>
+          </div>
+        `;
+        breakdownContainer.appendChild(card);
+      });
+
+      // Build Cloud Sync JSON Payload (Firebase + Google Sheets)
+      state.lastPayload = {
+        submittedAt: state.endTime.toISOString(),
+        firstName: state.student.firstName,
+        lastName: state.student.lastName,
+        fullName: fullName,
+        email: state.student.email,
+        timeTaken: timeTakenFormatted,
+        sections: sectionPayloadMap,
+        sectionDetails: sectionNumericMap,
+        totalScore: totalCorrect,
+        maxScore: QUESTIONS.length,
+        finalScoreText: `${totalCorrect}/70`,
+        percentage: accuracyPct,
+        englishLevel: placement.levelTitle,
+        cefrLevel: placement.cefr
+      };
+
+      // Prepare Formatted Clipboard Report
+      state.lastReportText = [
+        "LANGUAGE HUB PLACEMENT TEST REPORT",
+        "===================================",
+        `Student Name: ${fullName}`,
+        `Email Address: ${state.student.email}`,
+        `Date Completed: ${completedDateStr}`,
+        `Time Taken: ${timeTakenFormatted}`,
+        "",
+        `TOTAL SCORE: ${totalCorrect} / 70 (${accuracyPct}%)`,
+        `PLACED LEVEL: ${placement.levelTitle} (${placement.cefr})`,
+        "",
+        "SECTION BREAKDOWN:",
+        ...sectionSummaryLines
+      ].join("\n");
+
+      // Render Detailed Review List (Initially collapsed)
+      renderDetailedReviewList();
+      window.scrollTo({ top: 0, behavior: "smooth" });
+
+      // Automatically sync results to Firebase & Google Sheets
+      syncPayloadToCloud();
+    }
+
+    /**
+     * 8. DETAILED ANSWER REVIEW RENDERER & TOGGLE
+     */
+    function renderDetailedReviewList() {
+      const container = document.getElementById("detailedReviewContainer");
+      container.innerHTML = "";
+
+      SECTIONS.forEach((sec, idx) => {
+        const secQuestions = QUESTIONS.filter((q) => q.section === idx);
+        const secBlock = document.createElement("div");
+        secBlock.className = "space-y-3";
+
+        secBlock.innerHTML = `
+          <div class="flex items-center justify-between border-b border-slate-200 pb-2">
+            <h4 class="text-sm font-extrabold uppercase tracking-wider text-blue-900">
+              Section ${idx + 1}: ${sec.title} (Q${sec.start}–${sec.end})
+            </h4>
+            <span class="text-xs font-semibold text-slate-500">CEFR ${sec.cefr}</span>
+          </div>
+        `;
+
+        const listGrid = document.createElement("div");
+        listGrid.className = "grid grid-cols-1 gap-3";
+
+        secQuestions.forEach((q) => {
+          const userAns = state.userAnswers[q.id] || null;
+          const isCorrect = userAns === q.answer;
+
+          let statusBadge = "";
+          let cardBorder = "";
+          if (!userAns) {
+            statusBadge = `<span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-slate-200 text-slate-700">Unanswered</span>`;
+            cardBorder = "border-slate-200 bg-slate-50/70";
+          } else if (isCorrect) {
+            statusBadge = `<span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-emerald-100 text-emerald-800">Correct</span>`;
+            cardBorder = "border-emerald-200 bg-emerald-50/30";
+          } else {
+            statusBadge = `<span class="px-2.5 py-0.5 rounded-md text-xs font-bold bg-rose-100 text-rose-800">Incorrect</span>`;
+            cardBorder = "border-rose-200 bg-rose-50/30";
+          }
+
+          const dialoguePreview = q.lines
+            .map((line) => {
+              const filled = escapeHtml(line.text).replace(
+                "___",
+                `<strong class="underline decoration-2 text-blue-900">${escapeHtml(q.options[q.answer])}</strong>`
+              );
+              return `<span class="block"><strong class="text-slate-800">${escapeHtml(line.speaker)}:</strong> ${filled}</span>`;
+            })
+            .join("");
+
+          const itemEl = document.createElement("div");
+          itemEl.className = `rounded-xl border p-4 text-xs sm:text-sm space-y-2 ${cardBorder}`;
+          itemEl.innerHTML = `
+            <div class="flex items-center justify-between gap-2">
+              <span class="font-extrabold text-slate-900">Question ${q.id}</span>
+              ${statusBadge}
+            </div>
+            <div class="text-slate-700 space-y-1 leading-relaxed">${dialoguePreview}</div>
+            <div class="pt-1 flex flex-wrap items-center gap-4 text-xs">
+              <span>
+                Your Answer:
+                <strong class="${isCorrect ? "text-emerald-700" : userAns ? "text-rose-700" : "text-slate-500"}">
+                  ${userAns ? `${userAns} (${escapeHtml(q.options[userAns])})` : "None"}
+                </strong>
+              </span>
+              <span>
+                Correct Key:
+                <strong class="text-emerald-800">${q.answer} (${escapeHtml(q.options[q.answer])})</strong>
+              </span>
+            </div>
+          `;
+          listGrid.appendChild(itemEl);
+        });
+
+        secBlock.appendChild(listGrid);
+        container.appendChild(secBlock);
+      });
+    }
+
+    function toggleDetailedReview() {
+      const container = document.getElementById("detailedReviewContainer");
+      const btnText = document.getElementById("toggleReviewText");
+      const btnIcon = document.getElementById("toggleReviewIcon");
+      const isHidden = container.classList.contains("hidden");
+
+      if (isHidden) {
+        container.classList.remove("hidden");
+        btnText.textContent = "Hide Detailed Answers";
+        btnIcon.classList.add("rotate-180");
+      } else {
+        container.classList.add("hidden");
+        btnText.textContent = "Show Detailed Answers";
+        btnIcon.classList.remove("rotate-180");
+      }
+    }
+
+    /**
+     * 9. FIREBASE & GOOGLE SHEETS CLOUD SYNCHRONIZATION
+     */
+    function setBadgeState(elementId, statusType, text) {
+      const el = document.getElementById(elementId);
+      if (!el) return;
+
+      const styles = {
+        pending: "bg-blue-100 text-blue-800",
+        success: "bg-emerald-100 text-emerald-800",
+        demo: "bg-amber-100 text-amber-800",
+        error: "bg-rose-100 text-rose-800"
+      };
+      const dots = {
+        pending: "bg-blue-600 animate-ping",
+        success: "bg-emerald-600",
+        demo: "bg-amber-500",
+        error: "bg-rose-600"
+      };
+
+      el.className = `inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-semibold ${styles[statusType] || styles.demo}`;
+      el.innerHTML = `<span class="w-2 h-2 rounded-full ${dots[statusType] || dots.demo}"></span>${escapeHtml(text)}`;
+    }
+
+    async function syncPayloadToCloud() {
+      if (!state.lastPayload) return;
+      const cfg = getActiveConfig();
+      const payload = state.lastPayload;
+
+      // 1. Sync to Firebase Firestore
+      const hasFirebase = Boolean(cfg.firebaseConfig && cfg.firebaseConfig.apiKey && cfg.firebaseConfig.projectId);
+      if (!hasFirebase) {
+        setBadgeState("firebaseSyncBadge", "demo", "Firebase: Demo Mode (Not Configured)");
+      } else {
+        setBadgeState("firebaseSyncBadge", "pending", "Firebase: Saving...");
+        try {
+          if (!firestoreDb) {
+            await initFirebaseInstance();
+          }
+          if (!firestoreDb) throw new Error("Firestore not initialized");
+
+          await addDoc(collection(firestoreDb, "placement_results"), {
+            ...payload,
+            createdAt: serverTimestamp()
+          });
+          setBadgeState("firebaseSyncBadge", "success", "Firebase: Saved Successfully");
+        } catch (err) {
+          console.error("Firestore save error:", err);
+          setBadgeState("firebaseSyncBadge", "error", "Firebase: Sync Failed");
+        }
+      }
+
+      // 2. Sync to Google Sheets via Apps Script Webhook
+      const sheetsUrl = (cfg.googleSheetsWebhookUrl || "").trim();
+      if (!sheetsUrl) {
+        setBadgeState("sheetsSyncBadge", "demo", "Google Sheets: Demo Mode (Not Configured)");
+      } else {
+        setBadgeState("sheetsSyncBadge", "pending", "Google Sheets: Sending...");
+        try {
+          await fetch(sheetsUrl, {
+            method: "POST",
+            mode: "no-cors",
+            headers: {
+              "Content-Type": "text/plain;charset=utf-8"
+            },
+            body: JSON.stringify(payload)
+          });
+          setBadgeState("sheetsSyncBadge", "success", "Google Sheets: Sent Successfully");
+        } catch (err) {
+          console.error("Google Sheets webhook error:", err);
+          setBadgeState("sheetsSyncBadge", "error", "Google Sheets: Sync Failed");
+        }
+      }
+    }
+
+    /**
+     * 9. CSV DOWNLOAD, CLIPBOARD COPY & ADMIN MODAL HANDLERS
+     */
+    function downloadCsvReport() {
+      if (!state.lastPayload) return;
+      const p = state.lastPayload;
+      const headers = [
+        "Timestamp",
+        "Full Name",
+        "Email",
+        "Time Taken",
+        "Beginner (1-6)",
+        "Elementary (7-20)",
+        "Pre-Intermediate (21-34)",
+        "Intermediate (35-48)",
+        "Upper Intermediate (49-62)",
+        "Advanced (63-70)",
+        "Final Score",
+        "Percentage",
+        "English Level",
+        "CEFR Level"
+      ];
+      const row = [
+        p.submittedAt,
+        p.fullName,
+        p.email,
+        p.timeTaken,
+        p.sections.beginner,
+        p.sections.elementary,
+        p.sections.preIntermediate,
+        p.sections.intermediate,
+        p.sections.upperIntermediate,
+        p.sections.advanced,
+        p.finalScoreText,
+        `${p.percentage}%`,
+        p.englishLevel,
+        p.cefrLevel
+      ].map((val) => `"${String(val).replace(/"/g, '""')}"`);
+
+      const csvContent = `${headers.join(",")}\n${row.join(",")}`;
+      const blob = new Blob([csvContent], { type: "text/csv;charset=utf-8;" });
+      const url = URL.createObjectURL(blob);
+      const link = document.createElement("a");
+      const safeName = p.fullName.toLowerCase().replace(/[^a-z0-9]+/g, "_");
+      link.href = url;
+      link.setAttribute("download", `language_hub_placement_${safeName}.csv`);
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }
+
+    function openAdminModal() {
+      const cfg = getActiveConfig();
+      document.getElementById("cfgFirebaseApiKey").value = cfg.firebaseConfig.apiKey || "";
+      document.getElementById("cfgFirebaseAuthDomain").value = cfg.firebaseConfig.authDomain || "";
+      document.getElementById("cfgFirebaseProjectId").value = cfg.firebaseConfig.projectId || "";
+      document.getElementById("cfgFirebaseStorageBucket").value = cfg.firebaseConfig.storageBucket || "";
+      document.getElementById("cfgFirebaseSenderId").value = cfg.firebaseConfig.messagingSenderId || "";
+      document.getElementById("cfgFirebaseAppId").value = cfg.firebaseConfig.appId || "";
+      document.getElementById("cfgSheetsUrl").value = cfg.googleSheetsWebhookUrl || "";
+
+      updateAdminModalStatusIndicators(cfg);
+      document.getElementById("adminModal").classList.remove("hidden");
+    }
+
+    function closeAdminModal() {
+      document.getElementById("adminModal").classList.add("hidden");
+    }
+
+    function updateAdminModalStatusIndicators(cfg) {
+      const fbEl = document.getElementById("adminFirebaseStatusText");
+      const shEl = document.getElementById("adminSheetsStatusText");
+
+      if (cfg.firebaseConfig.apiKey && cfg.firebaseConfig.projectId) {
+        fbEl.textContent = "Configured";
+        fbEl.className = "text-xs font-bold text-emerald-600";
+      } else {
+        fbEl.textContent = "Not Configured";
+        fbEl.className = "text-xs font-semibold text-slate-400";
+      }
+
+      if (cfg.googleSheetsWebhookUrl) {
+        shEl.textContent = "Configured";
+        shEl.className = "text-xs font-bold text-emerald-600";
+      } else {
+        shEl.textContent = "Not Configured";
+        shEl.className = "text-xs font-semibold text-slate-400";
+      }
+    }
+
+    async function saveAdminSettings() {
+      const newCfg = {
+        firebaseConfig: {
+          apiKey: document.getElementById("cfgFirebaseApiKey").value.trim(),
+          authDomain: document.getElementById("cfgFirebaseAuthDomain").value.trim(),
+          projectId: document.getElementById("cfgFirebaseProjectId").value.trim(),
+          storageBucket: document.getElementById("cfgFirebaseStorageBucket").value.trim(),
+          messagingSenderId: document.getElementById("cfgFirebaseSenderId").value.trim(),
+          appId: document.getElementById("cfgFirebaseAppId").value.trim()
+        },
+        googleSheetsWebhookUrl: document.getElementById("cfgSheetsUrl").value.trim()
+      };
+
+      localStorage.setItem(STORAGE_KEY_CONFIG, JSON.stringify(newCfg));
+      updateAdminModalStatusIndicators(newCfg);
+      await initFirebaseInstance();
+
+      const toast = document.getElementById("adminSavedToast");
+      toast.classList.remove("hidden");
+      setTimeout(() => {
+        toast.classList.add("hidden");
+      }, 2500);
+    }
+
+    async function clearAdminSettings() {
+      localStorage.removeItem(STORAGE_KEY_CONFIG);
+      await initFirebaseInstance();
+      openAdminModal();
+    }
+
+    function copyAppsScriptCode() {
+      const codeText = document.getElementById("appsScriptSnippet").textContent;
+      const textarea = document.createElement("textarea");
+      textarea.value = codeText;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+      try {
+        document.execCommand("copy");
+        const btnText = document.getElementById("copyAppsScriptBtnText");
+        btnText.textContent = "Copied!";
+        setTimeout(() => {
+          btnText.textContent = "Copy Script";
+        }, 2500);
+      } catch (e) {
+        // Ignore copy error
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
+
+    function copyResultsSummary() {
+      const textarea = document.createElement("textarea");
+      textarea.value = state.lastReportText;
+      textarea.style.position = "fixed";
+      textarea.style.opacity = "0";
+      document.body.appendChild(textarea);
+      textarea.select();
+
+      try {
+        document.execCommand("copy");
+        const btnText = document.getElementById("copyBtnText");
+        btnText.textContent = "Copied!";
+        setTimeout(() => {
+          btnText.textContent = "Copy Report";
+        }, 2500);
+      } catch (err) {
+        // Fallback silent failure
+      } finally {
+        document.body.removeChild(textarea);
+      }
+    }
+
+    function resetApplication() {
+      closeResetModal();
+      if (state.timerInterval) clearInterval(state.timerInterval);
+
+      state = {
+        student: { firstName: "", lastName: "", email: "" },
+        currentSectionIndex: 0,
+        userAnswers: {},
+        secondsRemaining: TOTAL_SECONDS,
+        timerInterval: null,
+        startTime: null,
+        endTime: null,
+        isSubmitted: false,
+        lastReportText: "",
+        lastPayload: null
+      };
+
+      document.getElementById("registrationForm").reset();
+      document.getElementById("detailedReviewContainer").classList.add("hidden");
+      document.getElementById("toggleReviewText").textContent = "Show Detailed Answers";
+      document.getElementById("toggleReviewIcon").classList.remove("rotate-180");
+
+      document.getElementById("resultsView").classList.add("hidden");
+      document.getElementById("examView").classList.add("hidden");
+      document.getElementById("examHeaderControls").classList.add("hidden");
+      document.getElementById("headerProgressBarContainer").classList.add("hidden");
+      document.getElementById("welcomeView").classList.remove("hidden");
+
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+
+    /**
+     * Utility: Safe HTML escaping
+     */
+    function escapeHtml(str) {
+      return String(str)
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
+    }
+
+    // Expose functions globally for inline HTML event handlers inside ES Module
+    Object.assign(window, {
+      selectAnswer,
+      navigateSection,
+      openSubmitModal,
+      closeSubmitModal,
+      closeTimeUpModal,
+      openResetModal,
+      closeResetModal,
+      finalizeTest,
+      toggleDetailedReview,
+      copyResultsSummary,
+      downloadCsvReport,
+      resetApplication,
+      syncPayloadToCloud,
+      openAdminModal,
+      closeAdminModal,
+      saveAdminSettings,
+      clearAdminSettings,
+      copyAppsScriptCode
+    });
+  </script>
+</body>
+</html>
